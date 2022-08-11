@@ -1,1 +1,1 @@
-backend blue - 1.0.6
+backend blue - 1.0.7
