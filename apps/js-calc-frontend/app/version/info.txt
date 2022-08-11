@@ -1,1 +1,1 @@
-frontend blue - 1.0.5
+frontend blue - 1.0.6
