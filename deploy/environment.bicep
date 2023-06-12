@@ -117,9 +117,6 @@ resource environment 'Microsoft.App/managedEnvironments@2022-06-01-preview' = {
       internal: internalOnly
       platformReservedCidr: '10.2.0.0/24'
       platformReservedDnsIP: '10.2.0.10'
-      outboundSettings : {
-        outBoundType: 'LoadBalancer'
-      } 
     }
     zoneRedundant: false
   }
