@@ -1,11 +1,10 @@
 param environmentName string
 param location string = resourceGroup().location
-param appInsightsInstrumentationKey string
+param appInsightsConnectionString string
 param containerImage string
 
-resource jscalcbackend 'Microsoft.App/containerapps@2022-01-01-preview' = {
+resource jscalcbackend 'Microsoft.App/containerapps@2022-03-01' = {
   name: 'js-calc-backend'
-  kind: 'containerapp'
   location: location
   properties: {
     managedEnvironmentId: resourceId('Microsoft.App/managedEnvironments', environmentName)
@@ -30,14 +29,14 @@ resource jscalcbackend 'Microsoft.App/containerapps@2022-01-01-preview' = {
           image: containerImage
           name: 'js-calc-backend'
           resources: {
-            cpu: '1'
+            cpu: 1
             memory: '2Gi'
           } 
           probes: [
             {
               type: 'liveness'
               httpGet: {
-                path: '/ping'
+                path: '/healthz'
                 port: 8080
                 httpHeaders: [
                   {
@@ -52,7 +51,7 @@ resource jscalcbackend 'Microsoft.App/containerapps@2022-01-01-preview' = {
             {
               type: 'readiness'
               httpGet: {
-                path: '/ping'
+                path: '/healthz'
                 port: 8080
                 httpHeaders: [
                   {
@@ -75,14 +74,14 @@ resource jscalcbackend 'Microsoft.App/containerapps@2022-01-01-preview' = {
               value: 'frontend - blue'
             }
             {
-              name: 'INSTRUMENTATIONKEY'
-              value: appInsightsInstrumentationKey
+              name: 'AIC_STRING'
+              value: appInsightsConnectionString
             }
           ]
         }
       ]
       scale: {
-        minReplicas: 0
+        minReplicas: 1
         maxReplicas: 4
         rules: [
           {

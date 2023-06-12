@@ -12,6 +12,7 @@ module redis 'redis.bicep' = {
 module logging 'logging.bicep' = {
   name: 'container-app-logging'
   params: {
+    location: 'eastus'
     logAnalyticsWorkspaceName: 'logs-${environmentName}'
     appInsightsName: 'appins-${environmentName}'
   }
@@ -29,3 +30,11 @@ module environment 'environment.bicep' = {
     appInsightsConnectionString: logging.outputs.appInsightsConnectionString
   }
 }
+
+// module frontdoor 'frontdoor.bicep' = {
+//   name: 'frontdoor'
+//   params: {
+//     frontdoorName: 'appfront'
+//     privateLinkServiceId:
+//   }
+// }

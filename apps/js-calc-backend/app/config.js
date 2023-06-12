@@ -2,15 +2,15 @@ var config = {}
 const fs = require('fs');
 const OS = require('os');
 
-config.instrumentationKey = process.env.INSTRUMENTATIONKEY;
-if (config.instrumentationKey && config.instrumentationKey == "dummyValue")
+config.aicstring = process.env.AIC_STRING;
+if (config.aicstring && config.aicstring == "dummyValue")
 {
-    config.instrumentationKey = null;
+    config.aicstring = null;
 }
 
 config.port = process.env.PORT || 8080;
-config.laggy = process.env.LAGGY;
-config.buggy = process.env.BUGGY;
+config.laggy = process.env.LAGGY || true;
+config.buggy = process.env.BUGGY || true;
 config.writepath = process.env.WRITEPATH;
 config.version = "default - latest";
 

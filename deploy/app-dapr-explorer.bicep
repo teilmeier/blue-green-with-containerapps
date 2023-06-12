@@ -1,11 +1,10 @@
 param environmentName string
 param location string = resourceGroup().location
-param appInsightsInstrumentationKey string
 param containerImage string
+param appInsightsConnectionString string
 
-resource daprexplorer 'Microsoft.App/containerapps@2022-01-01-preview' = {
+resource daprexplorer 'Microsoft.App/containerapps@2022-03-01' = {
   name: 'js-explorer'
-  kind: 'containerapp'
   location: location
   properties: {
     managedEnvironmentId: resourceId('Microsoft.App/managedEnvironments', environmentName)
@@ -36,13 +35,17 @@ resource daprexplorer 'Microsoft.App/containerapps@2022-01-01-preview' = {
           image: containerImage
           name: 'js-explorer'
           resources: {
-            cpu: '0.5'
+            cpu: json('0.5')
             memory: '1Gi'
           }
           env:[
             {
               name: 'HTTP_PORT'
               value: '3000'
+            }
+            {
+              name: 'AIC_STRING'
+              value: appInsightsConnectionString
             }
           ]
         }
