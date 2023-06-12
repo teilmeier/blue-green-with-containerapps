@@ -65,7 +65,7 @@ properties:
     configuration:
         activeRevisionsMode: multiple
         ingress:
-            external: True
+            external: true
             allowInsecure: false
             targetPort: 8080
             traffic:
@@ -159,7 +159,7 @@ properties:
     configuration:
         activeRevisionsMode: multiple
         ingress:
-            external: True
+            external: true
             allowInsecure: false
             targetPort: 8080
             traffic:
