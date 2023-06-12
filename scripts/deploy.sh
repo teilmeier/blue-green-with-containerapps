@@ -63,7 +63,7 @@ tags:
 properties:
     managedEnvironmentId: /subscriptions/$SUBSCRIPTION_ID/resourceGroups/$RESOURCE_GROUP/providers/Microsoft.App/managedEnvironments/$CONTAINERAPPS_ENVIRONMENT_NAME
     configuration:
-        activeRevisionsMode: multiple
+        activeRevisionsMode: 'Multiple'
         ingress:
             external: true
             allowInsecure: false
@@ -71,7 +71,7 @@ properties:
             traffic:
             - latestRevision: true
               weight: 100
-            transport: Auto
+            transport: 'Auto'
         dapr:
           enabled: true
           appPort: 8080
@@ -82,22 +82,22 @@ properties:
         - image: $REGISTRY/$BACKEND_APP_ID:$VERSION
           name: $BACKEND_APP_ID
           env:
-          - name: VERSION
+          - name: 'VERSION'
             value: $WORKER_BACKEND_APP_VERSION
-          - name: PORT
+          - name: 'PORT'
             value: 8080
-          - name: INSTRUMENTATIONKEY
+          - name: 'INSTRUMENTATIONKEY'
             value: $AI_INSTRUMENTATION_KEY
           resources:
               cpu: 1
-              memory: 2Gi
+              memory: '2Gi'
         scale:
           minReplicas: 1
           maxReplicas: 4
           rules:
-          - name: backendrule
+          - name: 'backendrule'
             custom:
-              type: http
+              type: 'http'
               metadata:
                 concurrentRequests: 10
 EOF
@@ -157,7 +157,7 @@ tags:
 properties:
     managedEnvironmentId: /subscriptions/$SUBSCRIPTION_ID/resourceGroups/$RESOURCE_GROUP/providers/Microsoft.App/managedEnvironments/$CONTAINERAPPS_ENVIRONMENT_NAME
     configuration:
-        activeRevisionsMode: multiple
+        activeRevisionsMode: 'Multiple'
         ingress:
             external: true
             allowInsecure: false
@@ -167,7 +167,7 @@ properties:
               weight: 0
             - revisionName: $OLD_BACKEND_RELEASE_NAME
               weight: 100
-            transport: Auto
+            transport: 'Auto'
         dapr:
           enabled: true
           appPort: 8080
@@ -178,22 +178,22 @@ properties:
         - image: $REGISTRY/$BACKEND_APP_ID:$VERSION
           name: $BACKEND_APP_ID
           env:
-          - name: VERSION
+          - name: 'VERSION'
             value: $WORKER_BACKEND_APP_VERSION
-          - name: PORT
+          - name: 'PORT'
             value: 8080
-          - name: INSTRUMENTATIONKEY
+          - name: 'INSTRUMENTATIONKEY'
             value: $AI_INSTRUMENTATION_KEY
           resources:
               cpu: 1
-              memory: 2Gi
+              memory: '2Gi'
         scale:
           minReplicas: 1
           maxReplicas: 4
           rules:
-          - name: backendrule
+          - name: 'backendrule'
             custom:
-              type: http
+              type: 'http'
               metadata:
                 concurrentRequests: 10
 EOF
