@@ -8,8 +8,6 @@ if [ "$EXTENSION" = "" ]; then
     az extension add -n containerapp -y
 fi
 
-az extension add --name containerapp --upgrade
-
 # calculator properties
 FRONTEND_APP_ID="js-calc-frontend"
 BACKEND_APP_ID="js-calc-backend"
@@ -66,7 +64,7 @@ properties:
     configuration:
         activeRevisionsMode: Multiple
         ingress:
-            external: true
+            external: false
             allowInsecure: false
             targetPort: 8080
             traffic:
