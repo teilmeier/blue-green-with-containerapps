@@ -64,7 +64,7 @@ properties:
     configuration:
         activeRevisionsMode: Multiple
         ingress:
-            external: false
+            external: true
             allowInsecure: false
             targetPort: 8080
             traffic:
@@ -101,7 +101,8 @@ properties:
                 concurrentRequests: 10
 EOF
 
-
+    cat backend.yaml
+    
     az containerapp create  -n $BACKEND_APP_ID -g $RESOURCE_GROUP --yaml backend.yaml
 
     az containerapp show --resource-group $RESOURCE_GROUP --name $BACKEND_APP_ID --query "{FQDN:properties.configuration.ingress.fqdn,ProvisioningState:properties.provisioningState}" --out table
