@@ -8,6 +8,8 @@ if [ "$EXTENSION" = "" ]; then
     az extension add -n containerapp -y
 fi
 
+az extension add --name containerapp --upgrade
+
 # calculator properties
 FRONTEND_APP_ID="js-calc-frontend"
 BACKEND_APP_ID="js-calc-backend"
