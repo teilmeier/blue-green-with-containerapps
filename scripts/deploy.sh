@@ -89,7 +89,7 @@ properties:
           - name: 'INSTRUMENTATIONKEY'
             value: $AI_INSTRUMENTATION_KEY
           resources:
-              cpu: 1
+              cpu: json('1')
               memory: '2Gi'
         scale:
           minReplicas: 1
@@ -145,17 +145,17 @@ else
     echo "deploying new revision of $WORKER_BACKEND_APP_ID of $WORKER_BACKEND_APP_VERSION" 
 
 cat <<EOF > backend.yaml
-kind: containerapp
-location: $LOCATION
-name: $BACKEND_APP_ID
-resourceGroup: $RESOURCE_GROUP
-type: Microsoft.App/containerApps
+kind: 'containerapp'
+location: '$LOCATION'
+name: '$BACKEND_APP_ID'
+resourceGroup: '$RESOURCE_GROUP'
+type: 'Microsoft.App/containerApps'
 tags:
-    app: backend
-    version: $WORKER_BACKEND_APP_VERSION
-    color: $COLOR
+    app: 'backend'
+    version: '$WORKER_BACKEND_APP_VERSION'
+    color: '$COLOR'
 properties:
-    managedEnvironmentId: /subscriptions/$SUBSCRIPTION_ID/resourceGroups/$RESOURCE_GROUP/providers/Microsoft.App/managedEnvironments/$CONTAINERAPPS_ENVIRONMENT_NAME
+    managedEnvironmentId: '/subscriptions/$SUBSCRIPTION_ID/resourceGroups/$RESOURCE_GROUP/providers/Microsoft.App/managedEnvironments/$CONTAINERAPPS_ENVIRONMENT_NAME'
     configuration:
         activeRevisionsMode: 'Multiple'
         ingress:
@@ -165,27 +165,27 @@ properties:
             traffic:
             - latestRevision: true
               weight: 0
-            - revisionName: $OLD_BACKEND_RELEASE_NAME
+            - revisionName: '$OLD_BACKEND_RELEASE_NAME'
               weight: 100
             transport: 'Auto'
         dapr:
           enabled: true
           appPort: 8080
-          appId: $BACKEND_APP_ID
+          appId: '$BACKEND_APP_ID'
     template:
-        revisionSuffix: $VERSION
+        revisionSuffix: '$VERSION'
         containers:
-        - image: $REGISTRY/$BACKEND_APP_ID:$VERSION
-          name: $BACKEND_APP_ID
+        - image: '$REGISTRY/$BACKEND_APP_ID:$VERSION'
+          name: '$BACKEND_APP_ID'
           env:
           - name: 'VERSION'
-            value: $WORKER_BACKEND_APP_VERSION
+            value: '$WORKER_BACKEND_APP_VERSION'
           - name: 'PORT'
-            value: 8080
+            value: '8080'
           - name: 'INSTRUMENTATIONKEY'
-            value: $AI_INSTRUMENTATION_KEY
+            value: '$AI_INSTRUMENTATION_KEY'
           resources:
-              cpu: 1
+              cpu: json('1')
               memory: '2Gi'
         scale:
           minReplicas: 1
